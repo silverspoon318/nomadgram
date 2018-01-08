@@ -45,7 +45,6 @@ DJANGO_APPS = [
     'django.contrib.admin',
 ]
 THIRD_PARTY_APPS = [
-    'crispy_forms',  # Form layouts
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
@@ -55,6 +54,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # custom users app
     'nomadgram.users.apps.UsersConfig',
+    'nomadgram.images.apps.ImagesConfig',
     # Your stuff: custom apps go here
 ]
 
@@ -113,7 +113,16 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': env.db('DATABASE_URL', default='postgres:///nomadgram'),
 }
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+DATABASES = {
+    'default':{
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':'nomadgram',
+        'USER':'postgres',
+        'PASSWORD':'',
+        'HOST':'127.0.0.1',
+        'PORT':'5432',
+    }
+}
 
 
 # GENERAL CONFIGURATION
