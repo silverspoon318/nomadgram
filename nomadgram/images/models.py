@@ -6,7 +6,7 @@ class TimeStampedModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        abstract = True #이 모델은 데이터베이스를 생성하기 위해 사용되지 않는다., 다른 모델들을 우한 base로 사용된다.
+        abstract = True #이 모델은 데이터베이스를 생성하기 위해 사용되지 않는다., 다른 모델들을 위한 base로 사용된다.
 
 class Image(TimeStampedModel):
 
