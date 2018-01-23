@@ -15,7 +15,7 @@ class TimeStampedModel(models.Model):
 class Image(TimeStampedModel):
 
     """ Image Model """
-
+    id = 1
     file = models.ImageField()
     location = models.CharField(max_length = 140)
     caption = models.TextField()
@@ -32,7 +32,8 @@ class Comment(TimeStampedModel):
 
     message = models.TextField()
     creator = models.ForeignKey(user_models.User, null=True)
-    image = models.ForeignKey(Image, null=True)
+    image = models.ForeignKey(Image, null=True, related_name='comments')  # 연결된 이름이란, 이미지는 댓글을 찾을거고, 댓글을 찾는 방법은 그들의 '연결된 이름'을 부르는 방법
+    # 결국 set은 서로 연결된 모델을 그룹핑 하는 방법
 
     def __str__(self):
         return self.message
@@ -43,7 +44,7 @@ class Like(TimeStampedModel):
     """ Like Model """
 
     creator = models.ForeignKey(user_models.User, null=True)
-    image = models.ForeignKey(Image, null=True)
+    image = models.ForeignKey(Image, null=True, related_name='likes')
 
     def __str__(self):
         return 'User: {} - Image Caption: {}'.format(self.creator.username, self.image.caption)
